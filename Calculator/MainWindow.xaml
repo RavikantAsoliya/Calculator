@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Calculator"
+        xmlns:local="clr-namespace:Calculator.Custom_Controls"
         mc:Ignorable="d"
-        Title="Calculator" Height="540" Width="335" Background="#202020">
+        Title="Calculator WPF (.Net Framework)" Height="540" Width="335" Background="#202020">
     <Window.Resources>
 
         <Style x:Key="NumericButtonStyle" TargetType="Button">
@@ -112,6 +112,7 @@
         </Style>
 
     </Window.Resources>
+
     <Grid>
         <!-- Define the row heights -->
         <Grid.RowDefinitions>
@@ -156,8 +157,18 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+
             <TextBlock Grid.Row="0" Background="Transparent" Foreground="#a6a6a6" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16" Visibility="Hidden">TempText</TextBlock>
-            <TextBox Grid.Row="1" IsReadOnly="True" Background="#202020" BorderBrush="Transparent" BorderThickness="0" SelectionBrush="#00a9a9" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="46" FontWeight="SemiBold">123456789</TextBox>
+
+            <!--Custom control for displaying numbers-->
+            <local:CustomTextBox x:Name="textBoxDisplayNumber" Grid.Row="1"
+                             Text="0123456789" 
+                             IsReadOnly="True" Background="#202020" 
+                             BorderBrush="Transparent" BorderThickness="0" 
+                             SelectionBrush="#00a9a9" Foreground="#ffffff" 
+                             VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                             VerticalContentAlignment="Center" HorizontalContentAlignment="Left" 
+                             FontSize="46" FontWeight="SemiBold" Margin="10,0,10,0" />
 
         </Grid>
 
@@ -171,12 +182,12 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Content="MC" Grid.Column="0" Style="{StaticResource MemoryButtonStyle}"></Button>
-            <Button Content="MR" Grid.Column="1" Style="{StaticResource MemoryButtonStyle}"></Button>
-            <Button Content="M+" Grid.Column="2" Style="{StaticResource MemoryButtonStyle}"></Button>
-            <Button Content="M-" Grid.Column="3" Style="{StaticResource MemoryButtonStyle}"></Button>
-            <Button Content="MS" Grid.Column="4" Style="{StaticResource MemoryButtonStyle}"></Button>
-            <Button Content="M⌄" Grid.Column="5" Style="{StaticResource MemoryButtonStyle}"></Button>
+            <Button Content="MC" Grid.Column="0" x:Name="buttonMC" Style="{StaticResource MemoryButtonStyle}"/>
+            <Button Content="MR" Grid.Column="1" x:Name="buttonMR" Style="{StaticResource MemoryButtonStyle}"/>
+            <Button Content="M+" Grid.Column="2" x:Name="buttonMPlus" Style="{StaticResource MemoryButtonStyle}"/>
+            <Button Content="M-" Grid.Column="3" x:Name="buttonMMinus" Style="{StaticResource MemoryButtonStyle}"/>
+            <Button Content="MS" Grid.Column="4" x:Name="buttonMS" Style="{StaticResource MemoryButtonStyle}"/>
+            <Button Content="M⌄" Grid.Column="5" x:Name="buttonMDownArrow" Style="{StaticResource MemoryButtonStyle}"/>
 
         </Grid>
 
@@ -205,35 +216,35 @@
             </Grid.ColumnDefinitions>
 
             <!-- Buttons -->
-            <Button Grid.Column="0" Grid.Row="5" Style="{StaticResource NumericButtonStyle}">±</Button>
-            <Button Grid.Column="1" Grid.Row="5" Style="{StaticResource NumericButtonStyle}">0</Button>
-            <Button Grid.Column="2" Grid.Row="5" Style="{StaticResource NumericButtonStyle}">.</Button>
-            <Button Grid.Column="3" Grid.Row="5" Padding="0,0,0,7" Style="{StaticResource EqualButtonStyle}">=</Button>
+            <Button Grid.Column="0" Grid.Row="5" x:Name="buttonPlusMinus" Style="{StaticResource NumericButtonStyle}">±</Button>
+            <Button Grid.Column="1" Grid.Row="5" x:Name="buttonZero" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">0</Button>
+            <Button Grid.Column="2" Grid.Row="5" x:Name="buttonDot" Style="{StaticResource NumericButtonStyle}">.</Button>
+            <Button Grid.Column="3" Grid.Row="5" x:Name="buttonEqual" Padding="0,0,0,7" Style="{StaticResource EqualButtonStyle}">=</Button>
 
-            <Button Grid.Column="0" Grid.Row="4" Style="{StaticResource NumericButtonStyle}">1</Button>
-            <Button Grid.Column="1" Grid.Row="4" Style="{StaticResource NumericButtonStyle}">2</Button>
-            <Button Grid.Column="2" Grid.Row="4" Style="{StaticResource NumericButtonStyle}">3</Button>
-            <Button Grid.Column="3" Grid.Row="4" Style="{StaticResource FunctionButtonStyle}">+</Button>
+            <Button Grid.Column="0" Grid.Row="4" x:Name="buttonOne" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">1</Button>
+            <Button Grid.Column="1" Grid.Row="4" x:Name="buttonTwo" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">2</Button>
+            <Button Grid.Column="2" Grid.Row="4" x:Name="buttonThree" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">3</Button>
+            <Button Grid.Column="3" Grid.Row="4" x:Name="buttonPlus" Style="{StaticResource FunctionButtonStyle}">+</Button>
 
-            <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource NumericButtonStyle}">4</Button>
-            <Button Grid.Column="1" Grid.Row="3" Style="{StaticResource NumericButtonStyle}">5</Button>
-            <Button Grid.Column="2" Grid.Row="3" Style="{StaticResource NumericButtonStyle}">6</Button>
-            <Button Grid.Column="3" Grid.Row="3" Style="{StaticResource FunctionButtonStyle}">-</Button>
+            <Button Grid.Column="0" Grid.Row="3" x:Name="buttinFour" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">4</Button>
+            <Button Grid.Column="1" Grid.Row="3" x:Name="buttonFive" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">5</Button>
+            <Button Grid.Column="2" Grid.Row="3" x:Name="buttonSix" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">6</Button>
+            <Button Grid.Column="3" Grid.Row="3" x:Name="buttonMinus" Style="{StaticResource FunctionButtonStyle}">-</Button>
 
-            <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource NumericButtonStyle}">7</Button>
-            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource NumericButtonStyle}">8</Button>
-            <Button Grid.Column="2" Grid.Row="2" Style="{StaticResource NumericButtonStyle}">9</Button>
-            <Button Grid.Column="3" Grid.Row="2" Style="{StaticResource FunctionButtonStyle}">*</Button>
+            <Button Grid.Column="0" Grid.Row="2" x:Name="buttonSeven" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">7</Button>
+            <Button Grid.Column="1" Grid.Row="2" x:Name="buttonEight" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">8</Button>
+            <Button Grid.Column="2" Grid.Row="2" x:Name="buttonNine" Style="{StaticResource NumericButtonStyle}" Click="NumericButton_Click">9</Button>
+            <Button Grid.Column="3" Grid.Row="2" x:Name="buttonMultiplay" Style="{StaticResource FunctionButtonStyle}">*</Button>
 
-            <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource FunctionButtonStyle}">¹⁄ₓ</Button>
-            <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource FunctionButtonStyle}">x²</Button>
-            <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource FunctionButtonStyle}">²√x</Button>
-            <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource FunctionButtonStyle}">÷</Button>
+            <Button Grid.Column="0" Grid.Row="1" x:Name="buttonOneUponX" Style="{StaticResource FunctionButtonStyle}">¹⁄ₓ</Button>
+            <Button Grid.Column="1" Grid.Row="1" x:Name="buttonXSquare" Style="{StaticResource FunctionButtonStyle}">x²</Button>
+            <Button Grid.Column="2" Grid.Row="1" x:Name="buttonTwoRootX" Style="{StaticResource FunctionButtonStyle}">²√x</Button>
+            <Button Grid.Column="3" Grid.Row="1" x:Name="buttonDivide" Style="{StaticResource FunctionButtonStyle}">÷</Button>
 
-            <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource FunctionButtonStyle}">%</Button>
-            <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource FunctionButtonStyle}">CE</Button>
-            <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource FunctionButtonStyle}">C</Button>
-            <Button Grid.Column="3" Grid.Row="0" Style="{StaticResource FunctionButtonStyle}">←</Button>
+            <Button Grid.Column="0" Grid.Row="0" x:Name="buttonPercentage" Style="{StaticResource FunctionButtonStyle}">%</Button>
+            <Button Grid.Column="1" Grid.Row="0" x:Name="buttonCE" Style="{StaticResource FunctionButtonStyle}">CE</Button>
+            <Button Grid.Column="2" Grid.Row="0" x:Name="buttonC" Style="{StaticResource FunctionButtonStyle}" Click="ButtonC_Click">C</Button>
+            <Button Grid.Column="3" Grid.Row="0" x:Name="buttonBack" Style="{StaticResource FunctionButtonStyle}">←</Button>
         </Grid>
     </Grid>
 

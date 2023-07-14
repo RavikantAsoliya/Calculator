@@ -14,3 +14,4 @@ D:\Programming Resources\C Sharp\GitHub Projects\Calculator\Calculator\obj\Debug
 D:\Programming Resources\C Sharp\GitHub Projects\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
 D:\Programming Resources\C Sharp\GitHub Projects\Calculator\Calculator\obj\Debug\Calculator.exe
 D:\Programming Resources\C Sharp\GitHub Projects\Calculator\Calculator\obj\Debug\Calculator.pdb
+D:\Programming Resources\C Sharp\GitHub Projects\Calculator\Calculator\obj\Debug\GeneratedInternalTypeHelper.g.cs

@@ -24,5 +24,16 @@ namespace Calculator
         {
             InitializeComponent();
         }
+
+        private void ButtonC_Click(object sender, RoutedEventArgs e)
+        {
+            textBoxDisplayNumber.Text = "0";
+        }
+
+        private void NumericButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            textBoxDisplayNumber.Text += button.Content.ToString();
+        }
     }
 }
